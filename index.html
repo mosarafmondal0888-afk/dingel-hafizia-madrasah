@@ -3,230 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিঙ্গেল হাফিজিয়া মাদ্রাসা ম্যানেজার</title>
-    <!-- Tailwind CSS -->
+    <title>মাদ্রাসা ম্যানেজমেন্ট সিস্টেম</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* প্রিন্ট করার সময় অপ্রয়োজনীয় এলিমেন্ট হাইড করার স্টাইল */
         @media print {
-            body * { visibility: hidden; }
-            #receiptArea, #receiptArea * { visibility: visible; }
-            #receiptArea { position: absolute; left: 0; top: 0; width: 100%; }
-            .no-print { display: none !important; }
+            body * {
+                visibility: hidden;
+            }
+            #receiptModal, #receiptModal * {
+                visibility: visible;
+            }
+            #receiptModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white;
+            }
+            .no-print {
+                display: none !important;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-100 font-['Hind_Siliguri'] text-slate-800 antialiased min-h-screen">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
 
-    <!-- ================= 🔒 1. LOGIN PAGE ================= -->
-    <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900">
-        <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md border border-white/20 text-center space-y-6">
-            <div class="space-y-3">
-                <div class="w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto text-3xl shadow-lg ring-4 ring-emerald-100">
+    <!-- ================= ১. লগইন স্ক্রিন ================= -->
+    <div id="loginScreen" class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-100">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
                     <i class="fa-solid fa-mosque"></i>
                 </div>
-                <div>
-                    <h1 class="text-2xl font-bold text-slate-800">ডিঙ্গেল হাফিজিয়া মাদ্রাসা</h1>
-                    <p class="text-sm text-emerald-700 font-medium mt-1">ম্যানেজমেন্ট সিস্টেম লগইন</p>
-                </div>
+                <h2 class="text-2xl font-bold text-slate-800">মাদ্রাসা পোর্টালে প্রবেশ</h2>
+                <p class="text-xs text-slate-400 mt-1">ম্যানেজমেন্ট সিস্টেমে ঢুকতে পাসওয়ার্ড দিন</p>
             </div>
 
-            <form onsubmit="handleLogin(event)" class="space-y-4 text-left">
+            <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">পাসওয়ার্ড দিন</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                        <input type="password" id="passwordInput" required placeholder="••••••••" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    </div>
-                    <p id="errorMessage" style="display: none;" class="text-xs text-rose-600 font-medium mt-2">
-                        <i class="fa-solid fa-circle-exclamation mr-1"></i> ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।
-                    </p>
+                    <label class="block text-sm font-semibold mb-1 text-slate-600">পাসওয়ার্ড</label>
+                    <input type="password" id="passwordInput" required placeholder="পাসওয়ার্ড লিখুন..." 
+                        class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
                 </div>
-
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center gap-2">
-                    <span>লগইন করুন</span>
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <p id="errorMessage" class="text-xs text-rose-500 font-semibold hidden">
+                    <i class="fa-solid fa-circle-exclamation mr-1"></i> ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।
+                </p>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl transition text-sm shadow-md shadow-emerald-200">
+                    লগইন করুন
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- ================= 📊 2. MAIN DASHBOARD ================= -->
-    <div id="dashboardScreen" style="display: none;" class="h-screen overflow-hidden flex">
 
-        <!-- Sidebar -->
-        <aside class="w-64 bg-emerald-900 text-white flex flex-col justify-between shadow-xl hidden md:flex">
-            <div>
-                <div class="p-5 flex items-center gap-3 border-b border-emerald-800/60">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-xl">
-                        <i class="fa-solid fa-mosque"></i>
-                    </div>
+    <!-- ================= ২. মূল ড্যাশবোর্ড স্ক্রিন ================= -->
+    <div id="dashboardScreen" class="hidden flex-col min-h-screen">
+        
+        <!-- নেভবার -->
+        <header class="bg-white border-b border-slate-200 px-6 py-4 sticky top-0 z-10 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-kaaba"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-800 text-lg leading-tight">মাদ্রাসা ম্যানেজমেন্ট</h1>
+                    <p class="text-xs text-slate-400">ড্যাশবোর্ড ও কালেকশন সিস্টেম</p>
+                </div>
+            </div>
+            <button onclick="handleLogout()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                <i class="fa-solid fa-right-from-bracket"></i> লগআউট
+            </button>
+        </header>
+
+        <!-- ড্যাশবোর্ড কনটেন্ট -->
+        <main class="p-6 max-w-7xl mx-auto w-full space-y-6">
+
+            <!-- সামারি কার্ডস -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
                     <div>
-                        <h1 class="font-bold text-lg leading-tight">ডিঙ্গেল মাদ্রাসা</h1>
-                        <p class="text-xs text-emerald-300">ম্যানেজমেন্ট সিস্টেম</p>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">মোট ছাত্র সংখ্যা</p>
+                        <h3 id="totalStudents" class="text-3xl font-extrabold text-slate-800 mt-1">0</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-users"></i>
                     </div>
                 </div>
 
-                <nav class="p-4 space-y-1">
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-800 text-white font-medium">
-                        <i class="fa-solid fa-chart-pie w-5"></i> ড্যাশবোর্ড
-                    </a>
-                </nav>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">মোট ফি কালেকশন</p>
+                        <h3 id="totalCollection" class="text-3xl font-extrabold text-emerald-600 mt-1">₹0</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                </div>
             </div>
 
-            <div class="p-4 border-t border-emerald-800/60 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center font-bold">A</div>
-                    <div>
-                        <p class="text-sm font-semibold">এডমিন</p>
-                        <p class="text-xs text-emerald-300">অনলাইন</p>
-                    </div>
+            <!-- কন্ট্রোলস ও বাটনস -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col md:flex-row justify-between items-center gap-4">
+                
+                <!-- সার্চ ইনপুট -->
+                <div class="relative w-full md:w-80">
+                    <input type="text" id="searchInput" placeholder="নাম, রোল বা ক্লাস দিয়ে খুঁজুন..." 
+                        class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-slate-400 text-sm"></i>
                 </div>
-                <button onclick="handleLogout()" title="লগআউট" class="text-emerald-300 hover:text-rose-300 text-lg p-2">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
+
+                <!-- অ্যাকশন বাটনস -->
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <button onclick="toggleStudentModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                        <i class="fa-solid fa-user-plus"></i> নতুন ছাত্র ভর্তি
+                    </button>
+                    <button onclick="exportStudentsToCSV()" class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                        <i class="fa-solid fa-file-excel"></i> এক্সেল ডাউনলোড
+                    </button>
+                    <button onclick="backupData()" class="bg-slate-700 hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                        <i class="fa-solid fa-download"></i> ব্যাকআপ
+                    </button>
+                    <label class="bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer transition shadow-sm">
+                        <i class="fa-solid fa-upload"></i> রিস্টোর
+                        <input type="file" onchange="restoreData(event)" accept=".json" class="hidden">
+                    </label>
+                </div>
             </div>
-        </aside>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-y-auto">
-            <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
-                <h2 class="text-xl font-bold text-slate-800">ড্যাশবোর্ড ওভারভিউ</h2>
-                <div class="flex items-center gap-3">
-                    <button onclick="toggleStudentModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium shadow-md flex items-center gap-2">
-                        <i class="fa-solid fa-plus"></i> নতুন ছাত্র ভর্তি
-                    </button>
-                    <button onclick="handleLogout()" class="bg-rose-500 text-white px-3 py-2 rounded-lg text-sm font-medium">
-                        লগআউট
-                    </button>
+            <!-- স্টুডেন্ট টেবিল -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/80 border-b border-slate-100 text-xs text-slate-500 uppercase tracking-wider">
+                                <th class="p-4">রোল</th>
+                                <th class="p-4">ছাত্রের নাম</th>
+                                <th class="p-4">শ্রেণী</th>
+                                <th class="p-4">অভিভাবক ও ফোন</th>
+                                <th class="p-4">ধরন</th>
+                                <th class="p-4 text-center">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody" class="divide-y divide-slate-100 text-sm">
+                            <!-- JS দ্বারা টেবিল ডাটা এখানে রেন্ডার হবে -->
+                        </tbody>
+                    </table>
                 </div>
-            </header>
+            </div>
 
-            <main class="p-6 space-y-6">
-                <!-- Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-slate-500">মোট ছাত্র</p>
-                            <h3 class="text-2xl font-bold text-slate-800 mt-1" id="totalStudents">০</h3>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-slate-500">মোট আদায়কৃত ফি</p>
-                            <h3 class="text-2xl font-bold text-emerald-600 mt-1">৳ <span id="totalCollection">0</span></h3>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-wallet"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Student Table -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-                        <h3 class="font-bold text-lg text-slate-800">শিক্ষার্থী ও ফি তালিকা</h3>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm text-slate-600">
-                            <thead class="bg-slate-50 text-slate-700 font-semibold uppercase text-xs border-b border-slate-200">
-                                <tr>
-                                    <th class="p-4">রোল</th>
-                                    <th class="p-4">ছাত্রের নাম</th>
-                                    <th class="p-4">বিভাগ</th>
-                                    <th class="p-4">অভিভাবক ও মোবাইল</th>
-                                    <th class="p-4">টাইপ</th>
-                                    <th class="p-4 text-center">একশন / ফি</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentTableBody" class="divide-y divide-slate-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </main>
-        </div>
+        </main>
     </div>
 
-    <!-- Modal 1: Add Student Form -->
-    <div id="studentModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden">
-            <div class="bg-emerald-800 text-white p-4 px-6 flex justify-between items-center">
-                <h3 class="font-bold text-lg">নতুন ছাত্র ভর্তি ফর্ম</h3>
-                <button onclick="toggleStudentModal()" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+
+    <!-- ================= ৩. নতুন ছাত্র যোগ করার মডাল ================= -->
+    <div id="studentModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-100">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-800 text-lg">নতুন ছাত্র ভর্তি ফর্ম</h3>
+                <button onclick="toggleStudentModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <form id="addStudentForm" class="p-6 space-y-4">
+            <form id="addStudentForm" class="space-y-3">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">ছাত্রের পূর্ণ নাম</label>
-                    <input type="text" id="studentName" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="উদাহরণ: মোহাম্মদ আব্দুল্লাহ">
+                    <label class="block text-xs font-bold text-slate-600 mb-1">ছাত্রের নাম</label>
+                    <input type="text" id="studentName" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">বিভাগ/শ্রেণী</label>
-                        <select id="studentClass" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                            <option value="হিফজ">হিফজ</option>
-                            <option value="আদনা বা">আদনা বা</option>
-                            <option value="আদনা আলিফ">আদনা আলিফ</option>
-                            <option value="মক্তব">মক্তব</option>
-                        </select>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">শ্রেণী</label>
+                        <input type="text" id="studentClass" required placeholder="যেমন: ৫ম" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">রোল নম্বর</label>
-                        <input type="number" id="studentRoll" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="101">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">অভিভাবকের নাম</label>
-                        <input type="text" id="guardianName" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="অভিভাবকের নাম">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">মোবাইল নম্বর</label>
-                        <input type="tel" id="guardianPhone" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="017xxxxxxxx">
+                        <label class="block text-xs font-bold text-slate-600 mb-1">রোল নং</label>
+                        <input type="number" id="studentRoll" required placeholder="যেমন: 101" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">ছাত্রের ধরন</label>
-                    <select id="studentType" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                        <option value="Regular">সাধারণ </option>
-                        <option value="Orphan">এতিম </option>
-                        <option value="Poor">গরিব/দরিদ্র (ফ্রি)</option>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">অভিভাবকের নাম</label>
+                    <input type="text" id="guardianName" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">মোবাইল নম্বর (১০ ডিজিট)</label>
+                    <input type="tel" id="guardianPhone" placeholder="9876543210" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">ছাত্রের ক্যাটাগরি</label>
+                    <select id="studentType" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                        <option value="General">সাধারণ</option>
+                        <option value="Orphan">এতিম (ফ্রি)</option>
+                        <option value="Poor">গরিব (ফ্রি)</option>
                     </select>
                 </div>
-                <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="toggleStudentModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-slate-600 font-medium">বাতিল</button>
-                    <button type="submit" class="px-5 py-2 bg-emerald-600 text-white font-medium rounded-lg">সংরক্ষণ করুন</button>
+                <div class="flex gap-2 pt-2">
+                    <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-sm transition">সেভ করুন</button>
+                    <button type="button" onclick="toggleStudentModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-xl text-sm transition">বাতিল</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Modal 2: Fee Payment Modal -->
-    <div id="feeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
-            <div class="bg-emerald-800 text-white p-4 px-6 flex justify-between items-center">
-                <h3 class="font-bold text-lg">ফি গ্রহণ ফর্ম</h3>
-                <button onclick="toggleFeeModal()" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+
+    <!-- ================= ৪. ফি জমার মডাল ================= -->
+    <div id="feeModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 border border-slate-100">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-800 text-lg">ফি জমা গ্রহণ</h3>
+                <button onclick="toggleFeeModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <form id="payFeeForm" class="p-6 space-y-4">
+            <p id="feeStudentName" class="text-xs font-bold text-emerald-600 mb-3 bg-emerald-50 p-2 rounded-lg"></p>
+            <form id="payFeeForm" class="space-y-3">
                 <input type="hidden" id="feeStudentId">
                 <div>
-                    <p class="text-sm text-slate-500">ছাত্রের নাম:</p>
-                    <p class="text-base font-bold text-slate-800" id="feeStudentName">-</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">মাস নির্বাচন করুন</label>
-                    <select id="feeMonth" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                        <option value="জানুয়ারী">জানুয়ারী</option>
-                        <option value="ফেব্রুয়ারী">ফেব্রুয়ারী</option>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">মাস সিলেক্ট করুন</label>
+                    <select id="feeMonth" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                        <option value="জানুয়ারি">জানুয়ারি</option>
+                        <option value="ফেব্রুয়ারি">ফেব্রুয়ারি</option>
                         <option value="মার্চ">মার্চ</option>
                         <option value="এপ্রিল">এপ্রিল</option>
                         <option value="মে">মে</option>
@@ -240,72 +233,61 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">টাকার পরিমাণ (৳)</label>
-                    <input type="number" id="feeAmount" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="500">
+                    <label class="block text-xs font-bold text-slate-600 mb-1">টাকার পরিমাণ (₹)</label>
+                    <input type="number" id="feeAmount" required placeholder="500" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
-                <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="toggleFeeModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-slate-600 font-medium">বাতিল</button>
-                    <button type="submit" class="px-5 py-2 bg-emerald-600 text-white font-medium rounded-lg">জমা নিন ও রসিদ দিন</button>
+                <div class="flex gap-2 pt-2">
+                    <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-sm transition">জমা নিন</button>
+                    <button type="button" onclick="toggleFeeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-xl text-sm transition">বাতিল</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Modal 3: Money Receipt Modal (প্রিন্টযোগ্য রসিদ) -->
-    <div id="receiptModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 space-y-6">
+
+    <!-- ================= ৫. টাকার রসিদ মডাল ================= -->
+    <div id="receiptModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-100">
             
-            <div id="receiptArea" class="border-2 border-dashed border-emerald-600 p-6 rounded-xl bg-emerald-50/30 text-center space-y-4">
-                <div class="border-b border-emerald-200 pb-3">
-                    <h2 class="text-xl font-bold text-emerald-900">ডিঙ্গেল হাফিজিয়া মাদ্রাসা</h2>
-                    <p class="text-xs text-slate-500">টাকার জমা রসিদ (Money Receipt)</p>
+            <!-- রসিদ প্রিন্ট এরিয়া -->
+            <div id="receiptPrintArea" class="border border-dashed border-slate-300 p-5 rounded-xl bg-slate-50/50 space-y-4">
+                <div class="text-center border-b pb-3 border-slate-200">
+                    <h2 class="font-extrabold text-slate-800 text-xl">মাদ্রাসা ফি প্রাপ্তি রসিদ</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">রসিদ নম্বর: <span id="recNo" class="font-mono font-bold text-slate-700"></span></p>
                 </div>
-                <div class="text-left space-y-2 text-sm">
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">রসিদ নং:</span>
-                        <span class="font-bold text-slate-800" id="recNo">-</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">ছাত্রের নাম:</span>
-                        <span class="font-bold text-slate-800" id="recName">-</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">রোল নং:</span>
-                        <span class="font-bold text-slate-800" id="recRoll">-</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">বিভাগ:</span>
-                        <span class="font-bold text-slate-800" id="recClass">-</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">ফি-এর মাস:</span>
-                        <span class="font-bold text-slate-800" id="recMonth">-</span>
-                    </div>
-                    <div class="flex justify-between border-t border-slate-200 pt-2 text-base">
-                        <span class="font-bold text-slate-700">মোট জমা:</span>
-                        <span class="font-bold text-emerald-700" id="recAmount">৳ 0</span>
-                    </div>
+
+                <div class="grid grid-cols-2 gap-y-2 text-xs">
+                    <div><span class="text-slate-400">ছাত্রের নাম:</span> <p id="recName" class="font-bold text-slate-800 text-sm"></p></div>
+                    <div><span class="text-slate-400">রোল নম্বর:</span> <p id="recRoll" class="font-bold text-slate-800 text-sm"></p></div>
+                    <div><span class="text-slate-400">শ্রেণী:</span> <p id="recClass" class="font-bold text-slate-800"></p></div>
+                    <div><span class="text-slate-400">ফি-এর মাস:</span> <p id="recMonth" class="font-bold text-slate-800"></p></div>
+                    <div><span class="text-slate-400">জমার তারিখ:</span> <p id="recDate" class="font-bold text-slate-800"></p></div>
+                    <div><span class="text-slate-400">জমার পরিমাণ:</span> <p id="recAmount" class="font-extrabold text-emerald-600 text-base"></p></div>
                 </div>
-                <div class="pt-4 flex justify-between items-center text-xs text-slate-400 border-t border-emerald-100">
-                    <p>তারিখ: <span id="recDate"></span></p>
-                    <p>স্বাক্ষর: _____________</p>
+
+                <div class="pt-4 border-t border-slate-200 flex justify-between items-end text-[10px] text-slate-400">
+                    <p>কম্পিউটার জেনারেটেড রসিদ</p>
+                    <p class="font-bold text-slate-600">স্বাক্ষর: _____________</p>
                 </div>
             </div>
 
-            <div class="flex gap-3 no-print">
-                <button onclick="window.print()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-print"></i> প্রিন্ট / PDF ডাউনলোড
+            <!-- মডালের একশন বাটনস (প্রিন্টে আসবে না) -->
+            <div class="mt-5 flex flex-wrap justify-end gap-2 no-print">
+                <button onclick="sendWhatsAppReceipt()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> হোয়াটসঅ্যাপ
                 </button>
-                <button onclick="toggleReceiptModal()" class="px-4 py-2.5 border border-slate-200 rounded-xl text-slate-600 font-medium">
+                <button onclick="printReceipt()" class="bg-slate-800 hover:bg-slate-900 text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-print"></i> প্রিন্ট
+                </button>
+                <button onclick="toggleReceiptModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3.5 py-2 rounded-xl text-xs font-bold transition">
                     বন্ধ করুন
                 </button>
             </div>
-
         </div>
     </div>
 
-    <!-- Application Script -->
-    <script src="app.js"></script>
+    <!-- জাভাস্ক্রিপ্ট ফাইল লিংক -->
+    <script src="script.js"></script>
 </body>
-                        </html>
-                        
+                                                                           </html>
+                                                                           
