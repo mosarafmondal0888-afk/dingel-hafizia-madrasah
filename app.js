@@ -1,5 +1,5 @@
 // ১. মূল পাসওয়ার্ড ও মেমোরি কনফিগারেশন
-const MADRASA_PASSWORD = "123456";
+const MADRASA_PASSWORD = "123";
 
 // LocalStorage থেকে ডাটা লোড
 let students = JSON.parse(localStorage.getItem('madrasa_students')) || [];
