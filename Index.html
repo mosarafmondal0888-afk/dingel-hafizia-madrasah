@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আল-জামেয়া মাদরাসা</title>
+    <style>
+        /* CSS Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #0d5c3a;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #073b24;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #128251;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        /* Card Section */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #0d5c3a;
+            border-bottom: 2px solid #0d5c3a;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* Notice Board */
+        .notice-list {
+            list-style: none;
+        }
+
+        .notice-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .notice-list li span {
+            background: #0d5c3a;
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        /* Contact Form */
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #0d5c3a;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #073b24;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #073b24;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>দারুল উলুম মাদরাসা</h1>
+        <p>ইসলামী ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়</p>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#home">হোম</a>
+        <a href="#about">আমাদের সম্পর্কে</a>
+        <a href="#courses">পাঠ্যক্রম</a>
+        <a href="#notices">নোটিশ বোর্ড</a>
+        <a href="#contact">যোগাযোগ</a>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        
+        <!-- Left Main Content -->
+        <main>
+            <section id="about" class="card">
+                <h2>মাদরাসা সম্পর্কে</h2>
+                <p>আমাদের মাদরাসায় শিক্ষার্থীদের ইসলামী শরীয়াহ ও সুন্নাহ অনুসরণের পাশাপাশি আধুনিক শিক্ষার সুব্যবস্থা রয়েছে। হিফজ, ক্বিরাআত এবং কিতাব বিভাগের জন্য অভিজ্ঞ শিক্ষকবৃন্দ দ্বারা পরিচালিত হয়।</p>
+            </section>
+
+            <section id="courses" class="card">
+                <h2>আমাদের কোর্সসমূহ</h2>
+                <ul>
+                    <li><strong>নূরানী ও নাজেরা বিভাগ:</strong> শৈশবেই সঠিক উচ্চারণে কুরআন শিক্ষা।</li>
+                    <li><strong>হিফজুল কুরআন বিভাগ:</strong> তাজবীদ সহকারে হিফজ সমাপন।</li>
+                    <li><strong>কিতাব বিভাগ:</strong> ইবতেদায়ী থেকে দাওরায়ে হাদীস।</li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Right Sidebar (Notice Board & Contact) -->
+        <aside>
+            <section id="notices" class="card">
+                <h2>নোটিশ বোর্ড</h2>
+                <ul class="notice-list">
+                    <li><span>নতুন</span> ভর্তি পরীক্ষা আগামী মাসে শুরু হবে।</li>
+                    <li><span>জরুরি</span> বার্ষিক পরীক্ষার সময়সূচী প্রকাশ।</li>
+                    <li><span>তথ্য</span> অভিভাবক সভার তারিখ নির্ধারিত হয়েছে।</li>
+                </ul>
+            </section>
+
+            <section id="contact" class="card">
+                <h2>যোগাযোগ করুন</h2>
+                <form id="contactForm">
+                    <label>আপনার নাম:</label>
+                    <input type="text" placeholder="নাম লিখুন" required>
+                    
+                    <label>ফোন নম্বর:</label>
+                    <input type="tel" placeholder="মোবাইল নম্বর" required>
+                    
+                    <button type="submit">পাঠিয়ে দিন</button>
+                </form>
+            </section>
+        </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; ২০২৬ দারুল উলুম মাদরাসা। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <!-- JavaScript for Basic Interactivity -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে! শীঘ্রই আমরা যোগাযোগ করব।');
+            this.reset();
+        });
+    </script>
+
+</body>
+                      </html>
