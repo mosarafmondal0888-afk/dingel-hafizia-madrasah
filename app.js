@@ -353,4 +353,12 @@ function exportStudentsToCSV() {
     link.download = `Students_${new Date().toISOString().slice(0, 10)}.csv`;
     link.click();
                     }
+
+// Student data fetch kora
+fetch('students.json')
+  .then(res => res.json())
+  .then(data => {
+    console.log("Loaded Students:", data);
+  });
+
                                  
