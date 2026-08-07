@@ -4,25 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ডিঙ্গেল হাফিজিয়া মাদ্রাসা ম্যানেজার</title>
-    <!-- Tailwind CSS for Modern Styling -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Hind Siliguri for Bengali) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 font-['Hind_Siliguri'] text-slate-800 antialiased">
+<body class="bg-slate-100 font-['Hind_Siliguri'] text-slate-800 antialiased min-h-screen">
 
-    <!-- Wrapper -->
-    <div class="flex h-screen overflow-hidden">
+    <!-- ================= 🔒 1. LOGIN PAGE (লগইন পেজ) ================= -->
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md border border-white/20 text-center space-y-6">
+            
+            <!-- Logo & Header -->
+            <div class="space-y-3">
+                <div class="w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto text-3xl shadow-lg ring-4 ring-emerald-100">
+                    <i class="fa-solid fa-mosque"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-800">ডিঙ্গেল হাফিজিয়া মাদ্রাসা</h1>
+                    <p class="text-sm text-emerald-700 font-medium mt-1">ম্যানেজমেন্ট সিস্টেম লগইন</p>
+                </div>
+            </div>
 
-        <!-- Sidebar (সাইডবার) -->
+            <!-- Login Form -->
+            <form onsubmit="handleLogin(event)" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">পাসওয়ার্ড দিন</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="password" id="passwordInput" required placeholder="••••••••" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <p id="errorMessage" style="display: none;" class="text-xs text-rose-600 font-medium mt-2">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।
+                    </p>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm shadow-lg transition duration-200 flex items-center justify-center gap-2">
+                    <span>লগইন করুন</span>
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+            </form>
+
+            <p class="text-xs text-slate-400 border-t border-slate-100 pt-4">
+                ডিঙ্গেল হাফিজিয়া মাদ্রাসা ব্যবস্থাপনা সফটওয়্যার
+            </p>
+        </div>
+    </div>
+
+
+    <!-- ================= 📊 2. MAIN DASHBOARD (ড্যাশবোর্ড) ================= -->
+    <div id="dashboardScreen" style="display: none;" class="h-screen overflow-hidden flex">
+
+        <!-- Sidebar -->
         <aside class="w-64 bg-emerald-900 text-white flex flex-col justify-between shadow-xl hidden md:flex">
             <div>
-                <!-- Logo & Name -->
                 <div class="p-5 flex items-center gap-3 border-b border-emerald-800/60">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-xl shadow-lg">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-xl">
                         <i class="fa-solid fa-mosque"></i>
                     </div>
                     <div>
@@ -31,76 +71,58 @@
                     </div>
                 </div>
 
-                <!-- Navigation Menu -->
                 <nav class="p-4 space-y-1">
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-800 text-white font-medium transition">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-800 text-white font-medium">
                         <i class="fa-solid fa-chart-pie w-5"></i> ড্যাশবোর্ড
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50 hover:text-white font-medium transition">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50">
                         <i class="fa-solid fa-user-graduate w-5"></i> ছাত্র ব্যবস্থাপনা
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50 hover:text-white font-medium transition">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50">
                         <i class="fa-solid fa-money-bill-wave w-5"></i> ফি কালেকশন
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50 hover:text-white font-medium transition">
-                        <i class="fa-solid fa-hand-holding-heart w-5"></i> এতিম/ফ্রি তালিকা
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50 hover:text-white font-medium transition">
-                        <i class="fa-solid fa-calculator w-5"></i> আয়-ব্যয় হিসাব
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-200 hover:bg-emerald-800/50 hover:text-white font-medium transition">
-                        <i class="fa-solid fa-gear w-5"></i> সেটিংসে
                     </a>
                 </nav>
             </div>
 
-            <!-- User Profile Footer -->
             <div class="p-4 border-t border-emerald-800/60 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center font-bold">
-                        A
-                    </div>
+                    <div class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center font-bold">A</div>
                     <div>
                         <p class="text-sm font-semibold">এডমিন</p>
                         <p class="text-xs text-emerald-300">অনলাইন</p>
                     </div>
                 </div>
-                <button class="text-emerald-300 hover:text-white text-lg"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <button onclick="handleLogout()" title="লগআউট" class="text-emerald-300 hover:text-rose-300 text-lg p-2">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-y-auto">
-
-            <!-- Top Header Bar -->
-            <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10 shadow-sm">
+            <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
                 <div class="flex items-center gap-4">
-                    <button class="md:hidden text-slate-600 text-xl"><i class="fa-solid fa-bars"></i></button>
                     <h2 class="text-xl font-bold text-slate-800">ড্যাশবোর্ড ওভারভিউ</h2>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleStudentModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium shadow-md shadow-emerald-600/20 flex items-center gap-2 transition">
-                        <i class="fa-solid fa-plus"></i> নতুন ছাত্র ভর্তি
+                    <button onclick="handleLogout()" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 rounded-lg text-sm font-medium">
+                        লগআউট
                     </button>
                 </div>
             </header>
 
-            <!-- Main Body Container -->
             <main class="p-6 space-y-6">
-
-                <!-- Summary Cards (পরিসংখ্যান) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-slate-500">মোট ছাত্র</p>
-                            <h3 class="text-2xl font-bold text-slate-800 mt-1" id="totalStudents">০</h3>
+                            <h3 class="text-2xl font-bold text-slate-800 mt-1">০</h3>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-slate-500">চলতি মাসের আদায়</p>
                             <h3 class="text-2xl font-bold text-emerald-600 mt-1">৳ 0</h3>
@@ -109,115 +131,13 @@
                             <i class="fa-solid fa-wallet"></i>
                         </div>
                     </div>
-
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-slate-500">মোট বকেয়া</p>
-                            <h3 class="text-2xl font-bold text-rose-600 mt-1">৳ 0</h3>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-circle-exclamation"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-slate-500">এতিম / ফ্রি ছাত্র</p>
-                            <h3 class="text-2xl font-bold text-purple-600 mt-1">০</h3>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Student Management Section -->
-                <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
-                    <div class="p-5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <h3 class="font-bold text-lg text-slate-800">শিক্ষার্থী তালিকা</h3>
-                        <div class="relative w-full md:w-72">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                            <input type="text" placeholder="নাম বা মোবাইল দিয়ে খুঁজুন..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                        </div>
-                    </div>
-
-                    <!-- Student Table -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm text-slate-600">
-                            <thead class="bg-slate-50 text-slate-700 font-semibold uppercase text-xs border-b border-slate-200">
-                                <tr>
-                                    <th class="p-4">রোল/আইডি</th>
-                                    <th class="p-4">ছাত্রের নাম</th>
-                                    <th class="p-4">শ্রেণী/ বিভাগ</th>
-                                    <th class="p-4">অভিভাবক ও মোবাইল</th>
-                                    <th class="p-4">টাইপ</th>
-                                    <th class="p-4 text-center">একশন</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentTableBody" class="divide-y divide-slate-100">
-                                <!-- JavaScript দিয়ে ডাটা এখানে লোড হবে -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </main>
         </div>
     </div>
 
-    <!-- Modal Form for Adding Student -->
-    <div id="studentModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in">
-            <div class="bg-emerald-800 text-white p-4 px-6 flex justify-between items-center">
-                <h3 class="font-bold text-lg">নতুন ছাত্র ভর্তি ফর্ম</h3>
-                <button onclick="toggleStudentModal()" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <form id="addStudentForm" class="p-6 space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">ছাত্রের পূর্ণ নাম</label>
-                    <input type="text" id="studentName" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="উদাহরণ: মোহাম্মদ আব্দুল্লাহ">
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">বিভাগ/শ্রেণী</label>
-                        <select id="studentClass" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                            <option value="হাফিজিয়া">হাফিজিয়া</option>
-                            <option value="নাজেরা">নাজেরা</option>
-                            <option value="নূরানী">নূরানী</option>
-                            <option value="কায়দা">কায়দা</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">রোল নম্বর</label>
-                        <input type="number" id="studentRoll" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="101">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">অভিভাবকের নাম</label>
-                        <input type="text" id="guardianName" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="অভিভাবকের নাম">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">মোবাইল নম্বর</label>
-                        <input type="tel" id="guardianPhone" required class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="017xxxxxxxx">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">ছাত্রের ধরন</label>
-                    <select id="studentType" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                        <option value="Regular">সাধারণ (নিয়মিত)</option>
-                        <option value="Orphan">এতিম (ফি মওকুফ)</option>
-                        <option value="Poor">গরিব/দরিদ্র (ফ্রি)</option>
-                    </select>
-                </div>
-                <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="toggleStudentModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-slate-600 font-medium hover:bg-slate-50">বাতিল</button>
-                    <button type="submit" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg shadow-md shadow-emerald-600/20">সংরক্ষণ করুন</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    <!-- Application Script -->
     <script src="app.js"></script>
 </body>
-</html>
+        </html>
+        
