@@ -1,7 +1,7 @@
 // ==========================================
 // ১. গ্লোবাল ভ্যারিয়েবল ও কনফিগারেশন
 // ==========================================
-const MADRASA_PASSWORD = "123"; // ডিফল্ট পাসওয়ার্ড
+const MADRASA_PASSWORD = "123"; // 
 let students = JSON.parse(localStorage.getItem('madrasa_students')) || [];
 let collections = JSON.parse(localStorage.getItem('madrasa_collections')) || [];
 let currentReceiptNo = null;
