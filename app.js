@@ -104,7 +104,7 @@ function showReceipt(record) {
     document.getElementById('recRoll').innerText = record.roll;
     document.getElementById('recClass').innerText = record.class;
     document.getElementById('recMonth').innerText = record.month;
-    document.getElementById('recAmount').innerText = '৳ ' + record.amount;
+    document.getElementById('recAmount').innerText = '₹' + record.amount;
     document.getElementById('recDate').innerText = record.date;
 
     toggleReceiptModal();
