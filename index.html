@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ডিঙ্গেল হাফিজিয়া মাদ্রাসা</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen">
 
-    <!-- ১. লগইন স্ক্রিন -->
     <div id="loginScreen" class="flex min-h-screen items-center justify-center p-4">
         <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border border-slate-200">
             <div class="text-center mb-6">
@@ -40,9 +36,7 @@
         </div>
     </div>
 
-    <!-- ২. মূল ড্যাশবোর্ড -->
     <div id="dashboardScreen" class="hidden min-h-screen flex-col">
-        <!-- নেভিগেশন বার -->
         <header class="bg-emerald-800 text-white shadow-lg p-4 sticky top-0 z-10">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -56,7 +50,6 @@
         </header>
 
         <main class="max-w-7xl mx-auto w-full p-4 md:p-6 flex-grow">
-            <!-- সামারি কার্ডস -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex justify-between items-center">
                     <div>
@@ -74,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- ফিল্টার ও অ্যাকশন বার -->
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-col md:flex-row justify-between gap-4">
                 <div class="relative flex-grow">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-slate-400"></i>
@@ -91,7 +83,6 @@
                 </div>
             </div>
 
-            <!-- ছাত্র তালিকা টেবিল -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -105,16 +96,13 @@
                         </tr>
                     </thead>
                     <tbody id="studentTableBody">
-                        <!-- ডাটা রেন্ডার হবে -->
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </main>
     </div>
 
-    <!-- মডালসমূহ পার্ট-২ এ রয়েছে -->
     <script src="app.js"></script>
-    <!-- ১. নতুন ছাত্র ভর্তি মডাল -->
     <div id="studentModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
@@ -124,11 +112,17 @@
             <form id="addStudentForm" class="space-y-3">
                 <input type="text" id="studentName" placeholder="ছাত্রের নাম" required class="w-full p-2.5 border rounded-lg">
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="studentClass" placeholder="শ্রেণী" required class="w-full p-2.5 border rounded-lg">
-                    <input type="number" id="studentRoll" placeholder="রোল নং" required class="w-full p-2.5 border rounded-lg">
+                    <select id="studentClass" required class="w-full p-2.5 border rounded-lg bg-white">
+                        <option value="" disabled selected>শ্রেণী সিলেক্ট করুন</option>
+                        <option value="মক্তব">মক্তব</option>
+                        <option value="হিফজ">হিফজ</option>
+                        <option value="আদনা আলিফ">আদনা আলিফ</option>
+                        <option value="আদনা বা">আদনা বা</option>
+                    </select>
+                    <input type="number" id="studentRoll" placeholder="রোল নং (ঐচ্ছিক)" class="w-full p-2.5 border rounded-lg">
                 </div>
-                <input type="text" id="guardianName" placeholder="অভিভাবকের নাম" required class="w-full p-2.5 border rounded-lg">
-                <input type="tel" id="guardianPhone" placeholder="১০ সংখ্যার মোবাইল নম্বর" class="w-full p-2.5 border rounded-lg">
+                <input type="text" id="guardianName" placeholder="অভিভাবকের নাম (ঐচ্ছিক)" class="w-full p-2.5 border rounded-lg">
+                <input type="tel" id="guardianPhone" placeholder="১০ সংখ্যার মোবাইল নম্বর (ঐচ্ছিক)" class="w-full p-2.5 border rounded-lg">
                 <select id="studentType" class="w-full p-2.5 border rounded-lg bg-white">
                     <option value="General">সাধারণ (ফি প্রযোজ্য)</option>
                     <option value="Orphan">এতিম (ফ্রি)</option>
@@ -142,7 +136,6 @@
         </div>
     </div>
 
-    <!-- ২. ফি জমা নেওয়ার মডাল -->
     <div id="feeModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
@@ -181,7 +174,6 @@
         </div>
     </div>
 
-    <!-- ৩. রসিদ দেখার মডাল -->
     <div id="receiptModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
             <div id="printableReceipt" class="border p-4 rounded-xl border-dashed border-slate-300">
@@ -206,4 +198,5 @@
         </div>
     </div>
   </body>
-</html>
+    </html>
+                        
