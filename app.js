@@ -31,12 +31,31 @@ function formatINR(amount) {
 }
 
 // ==========================================
-// ২. ক্লাউড ডাটা ফেচিং (Firestore Realtime/Get)
+// ২. ক্লাউড ও JSON ডাটা ফেচিং
 // ==========================================
 async function fetchStudents() {
     try {
+        // ১. আগে Firebase Firestore থেকে data নেওয়ার চেষ্টা করবে
         const snapshot = await db.collection('students').get();
-        students = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        if (!snapshot.empty) {
+            students = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } else {
+            // ২. Firestore ফাঁকা থাকলে students.json ফাইল থেকে load করবে
+            const res = await fetch('students.json');
+            const jsonData = await res.json();
+            
+            // JSON format-কে App Format-এ রূপান্তর
+            students = jsonData.map(s => ({
+                id: 'std_' + s.roll,
+                roll: s.roll,
+                name: s.name,
+                class: s.class,
+                guardian: s.father || 'N/A',
+                phone: s.number || 'N/A',
+                type: s.monthly === 'ATIM' ? 'Orphan' : (s.monthly === 'N RSD' ? 'Poor' : 'General'),
+                monthly: s.monthly
+            }));
+        }
         renderStudents();
     } catch (error) {
         console.error("Error fetching students:", error);
@@ -89,6 +108,9 @@ function toggleReceiptModal() { document.getElementById('receiptModal').classLis
 // ৫. ইভেন্ট লিসেনার ও ফর্ম সাবমিশন
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+    // পেজ লোড হলেই ছাত্র ডাটা ফেচ হবে
+    fetchStudents();
+
     // নতুন ছাত্র ফর্ম
     const addForm = document.getElementById('addStudentForm');
     if (addForm) {
@@ -212,7 +234,7 @@ function renderStudents(searchQuery = '') {
             ? '<span class="bg-purple-100 text-purple-700 px-2.5 py-1 rounded-full text-xs font-semibold">এতিম (ফ্রি)</span>'
             : student.type === 'Poor' 
             ? '<span class="bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold">গরিব (ফ্রি)</span>'
-            : '<span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-semibold">সাধারণ</span>';
+            : `<span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-semibold">${student.monthly ? '₹'+student.monthly : 'সাধারণ'}</span>`;
 
         const row = document.createElement('tr');
         row.className = 'hover:bg-slate-50 border-b border-slate-100 transition';
@@ -352,13 +374,5 @@ function exportStudentsToCSV() {
     link.href = encodeURI(csv);
     link.download = `Students_${new Date().toISOString().slice(0, 10)}.csv`;
     link.click();
-                    }
-
-// Student data fetch kora
-fetch('students.json')
-  .then(res => res.json())
-  .then(data => {
-    console.log("Loaded Students:", data);
-  });
-
-                                 
+}
+  
