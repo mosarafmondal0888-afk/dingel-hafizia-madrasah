@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আল-জামেয়া মাদরাসা</title>
+    <title>দিংগেল হাফিজিয়া মাদরাসা</title>
     <style>
         /* CSS Styling */
         * {
@@ -16,6 +16,7 @@
         body {
             background-color: #f4f7f6;
             color: #333;
+            line-height: 1.6;
         }
 
         /* Header */
@@ -23,12 +24,17 @@
             background-color: #0d5c3a;
             color: white;
             text-align: center;
-            padding: 25px 15px;
+            padding: 30px 15px;
         }
 
         header h1 {
             font-size: 2.2rem;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         /* Navigation Bar */
@@ -45,6 +51,7 @@
             text-decoration: none;
             text-align: center;
             transition: 0.3s;
+            font-weight: 500;
         }
 
         nav a:hover {
@@ -75,6 +82,25 @@
             border-bottom: 2px solid #0d5c3a;
             padding-bottom: 8px;
             margin-bottom: 15px;
+        }
+
+        /* Info & Contact Styling */
+        .info-item {
+            margin-bottom: 12px;
+        }
+
+        .info-item strong {
+            color: #073b24;
+        }
+
+        .phone-link {
+            color: #0d5c3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
         }
 
         /* Notice Board */
@@ -112,6 +138,7 @@
             border: none;
             font-size: 1rem;
             cursor: pointer;
+            font-weight: bold;
         }
 
         button:hover {
@@ -139,8 +166,8 @@
 
     <!-- Header Section -->
     <header>
-        <h1>দারুল উলুম মাদরাসা</h1>
-        <p>ইসলামী ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়</p>
+        <h1>দিংগেল হাফিজিয়া মাদরাসা</h1>
+        <p>ভি.পি.ও: দিংগেল, কালিগঞ্জ, নদীয়া - ৭৪১১৩৭</p>
     </header>
 
     <!-- Navigation Menu -->
@@ -148,7 +175,6 @@
         <a href="#home">হোম</a>
         <a href="#about">আমাদের সম্পর্কে</a>
         <a href="#courses">পাঠ্যক্রম</a>
-        <a href="#notices">নোটিশ বোর্ড</a>
         <a href="#contact">যোগাযোগ</a>
     </nav>
 
@@ -159,32 +185,48 @@
         <main>
             <section id="about" class="card">
                 <h2>মাদরাসা সম্পর্কে</h2>
-                <p>আমাদের মাদরাসায় শিক্ষার্থীদের ইসলামী শরীয়াহ ও সুন্নাহ অনুসরণের পাশাপাশি আধুনিক শিক্ষার সুব্যবস্থা রয়েছে। হিফজ, ক্বিরাআত এবং কিতাব বিভাগের জন্য অভিজ্ঞ শিক্ষকবৃন্দ দ্বারা পরিচালিত হয়।</p>
+                <p><strong>দিংগেল হাফিজিয়া মাদরাসা</strong> নদীয়া জেলার কালিগঞ্জ ব্লকের অন্তর্গত একটি অন্যতম দ্বীনি শিক্ষা প্রতিষ্ঠান। এখানে অত্যন্ত যত্নের সাথে শিক্ষার্থীদের সঠিক উচ্চারণে পবিত্র কুরআন শিক্ষা ও হিফজ সমাপন করানো হয়।</p>
             </section>
 
             <section id="courses" class="card">
                 <h2>আমাদের কোর্সসমূহ</h2>
                 <ul>
-                    <li><strong>নূরানী ও নাজেরা বিভাগ:</strong> শৈশবেই সঠিক উচ্চারণে কুরআন শিক্ষা।</li>
-                    <li><strong>হিফজুল কুরআন বিভাগ:</strong> তাজবীদ সহকারে হিফজ সমাপন।</li>
-                    <li><strong>কিতাব বিভাগ:</strong> ইবতেদায়ী থেকে দাওরায়ে হাদীস।</li>
+                    <li><strong>নূরানী ও নাজেরা বিভাগ:</strong> তাজবীদ সহকারে সহীহ-শুদ্ধভাবে কুরআন তেলাওয়াত শিক্ষা।</li>
+                    <li><strong>হিফজুল কুরআন বিভাগ:</strong> অভিজ্ঞ হাফেজ শিক্ষক দ্বারা কুরআন হিফজ করানোর ব্যবস্থা।</li>
+                    <li><strong>দিয়াণত ও চরিত্র গঠন:</strong> ইসলামী অনুশাসন ও নৈতিক শিক্ষা প্রদান।</li>
                 </ul>
+            </section>
+
+            <section id="address" class="card">
+                <h2>ঠিকানা ও অবস্থান</h2>
+                <div class="info-item"><strong>গ্রাম ও পোস্ট (VPO):</strong> দিংগেল (Dingel)</div>
+                <div class="info-item"><strong>থানা/ব্লক:</strong> কালিগঞ্জ (Kaliganj)</div>
+                <div class="info-item"><strong>জেলা:</strong> নদীয়া (Nadia)</div>
+                <div class="info-item"><strong>পিন কোড:</strong> ৭৪১১৩৭ (741137)</div>
             </section>
         </main>
 
         <!-- Right Sidebar (Notice Board & Contact) -->
         <aside>
+            <section id="contact" class="card">
+                <h2>জরুরি নম্বর</h2>
+                <div class="info-item">
+                    📞 <strong>ফোন:</strong> <br>
+                    <a href="tel:8597746982" class="phone-link">8597746982</a> / 
+                    <a href="tel:7586077830" class="phone-link">7586077830</a>
+                </div>
+            </section>
+
             <section id="notices" class="card">
                 <h2>নোটিশ বোর্ড</h2>
                 <ul class="notice-list">
-                    <li><span>নতুন</span> ভর্তি পরীক্ষা আগামী মাসে শুরু হবে।</li>
-                    <li><span>জরুরি</span> বার্ষিক পরীক্ষার সময়সূচী প্রকাশ।</li>
-                    <li><span>তথ্য</span> অভিভাবক সভার তারিখ নির্ধারিত হয়েছে।</li>
+                    <li><span>ভর্তি</span> নতুন শিক্ষাবর্ষে ভর্তি চলছে।</li>
+                    <li><span>জরুরি</span> যেকোনো তথ্যের জন্য উপরে দেওয়া নম্বরে যোগাযোগ করুন।</li>
                 </ul>
             </section>
 
-            <section id="contact" class="card">
-                <h2>যোগাযোগ করুন</h2>
+            <section class="card">
+                <h2>বার্তা পাঠান</h2>
                 <form id="contactForm">
                     <label>আপনার নাম:</label>
                     <input type="text" placeholder="নাম লিখুন" required>
@@ -201,17 +243,17 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; ২০২৬ দারুল উলুম মাদরাসা। সর্বস্বত্ব সংরক্ষিত।</p>
+        <p>&copy; ২০২৬ দিংগেল হাফিজিয়া মাদরাসা। সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
-    <!-- JavaScript for Basic Interactivity -->
+    <!-- JavaScript -->
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে! শীঘ্রই আমরা যোগাযোগ করব।');
+            alert('ধন্যবাদ! আপনার তথ্যটি পাওয়া গেছে। আমরা শীঘ্রই যোগাযোগ করব।');
             this.reset();
         });
     </script>
 
 </body>
-                      </html>
+</html>
