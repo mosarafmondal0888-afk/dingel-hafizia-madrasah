@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b6b61">
+  <meta name="description" content="Dingel Hafizia Madrasa Professional Management System">
+  <title>Dingel Hafizia Madrasa ERP</title>
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDK -->
+  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       LOGIN SCREEN
+       ===================================================== -->
+  <div id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+      <div class="login-logo">
+        <img src="logo.png" alt="Dingel Hafizia Madrasa Logo">
+      </div>
+
+      <div class="eyebrow">DINGEL HAFIZIA MADRASA</div>
+
+      <h1>Professional ERP</h1>
+
+      <p class="login-subtitle">
+        Madrasa Management System
+      </p>
+
+      <form id="loginForm" autocomplete="off">
+
+        <div class="field">
+          <label for="loginPassword">Password</label>
+
+          <input
+            id="loginPassword"
+            name="password"
+            type="password"
+            inputmode="numeric"
+            autocomplete="current-password"
+            placeholder="Enter password"
+            required
+          >
+        </div>
+
+        <button
+          class="btn primary login-btn"
+          type="submit"
+        >
+          Login
+        </button>
+
+        <div
+          id="loginError"
+          class="login-error"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       APPLICATION
+       ===================================================== -->
+  <div id="app" class="app-shell hidden">
+
+    <!-- Mobile overlay -->
+    <div
+      id="sidebarOverlay"
+      class="sidebar-overlay"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ===================================================
+         SIDEBAR
+         =================================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar"
+      aria-label="Main navigation"
+    >
+
+      <div class="brand">
+
+        <div class="brand-logo">
+          <img
+            src="logo.png"
+            alt="Dingel Hafizia Madrasa"
+          >
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            ডিঙ্গেল হাফিজিয়া
+          </strong>
+
+          <span>
+            Madrasa ERP
+          </span>
+
+        </div>
+
+        <button
+          id="sidebarClose"
+          class="icon-btn sidebar-close"
+          type="button"
+          aria-label="Close menu"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="sidebar-profile">
+
+        <div class="avatar">
+          DH
+        </div>
+
+        <div>
+
+          <b>
+            Admin
+          </b>
+
+          <small>
+            Madrasa Management
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <nav id="mainNav" class="nav">
+
+        <div class="nav-label">
+          MAIN
+        </div>
+
+        <button
+          class="nav-item active"
+          type="button"
+          data-page="dashboard"
+        >
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </button>
+
+
+        <div class="nav-label">
+          MANAGEMENT
+        </div>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="students"
+        >
+          <span class="nav-icon">♙</span>
+          <span>Students</span>
+        </button>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="fees"
+        >
+          <span class="nav-icon">৳</span>
+          <span>Fees</span>
+        </button>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="due"
+        >
+          <span class="nav-icon">!</span>
+          <span>Due Management</span>
+        </button>
+
+
+        <div class="nav-label">
+          MADRASA ACCOUNTS
+        </div>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="income"
+        >
+          <span class="nav-icon">↗</span>
+          <span>Income</span>
+        </button>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="expense"
+        >
+          <span class="nav-icon">↘</span>
+          <span>Expenses</span>
+        </button>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="accounts"
+        >
+          <span class="nav-icon">▣</span>
+          <span>Accounts</span>
+        </button>
+
+
+        <div class="nav-label">
+          REPORTS & SETTINGS
+        </div>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="reports"
+        >
+          <span class="nav-icon">▤</span>
+          <span>Reports</span>
+        </button>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="settings"
+        >
+          <span class="nav-icon">⚙</span>
+          <span>Madrasa Profile</span>
+        </button>
+
+      </nav>
+
+
+      <div class="sidebar-footer">
+
+        <div class="security-note">
+          <span>🔒</span>
+          <div>
+            <b>Admin Mode</b>
+            <small>Secure management workspace</small>
+          </div>
+        </div>
+
+        <button
+          id="logoutButton"
+          class="btn ghost logout-btn"
+          type="button"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         MAIN AREA
+         =================================================== -->
+    <main class="main">
+
+      <!-- Topbar -->
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <button
+            id="menuButton"
+            class="icon-btn menu-button"
+            type="button"
+            aria-label="Open menu"
+            aria-controls="sidebar"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+
+          <div>
+
+            <div class="topbar-title">
+              Dingel Hafizia Madrasa
+            </div>
+
+            <div
+              id="breadcrumb"
+              class="breadcrumb"
+            >
+              Dashboard
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <div class="connection-status">
+            <span
+              id="connectionDot"
+              class="status-dot"
+            ></span>
+
+            <span id="connectionText">
+              Ready
+            </span>
+          </div>
+
+          <div class="date-chip">
+            <span>●</span>
+            <span id="currentDate"></span>
+          </div>
+
+          <button
+            id="quickAddButton"
+            class="btn primary topbar-add"
+            type="button"
+          >
+            ＋ Add
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- Dynamic page -->
+      <div
+        id="view"
+        class="view"
+        aria-live="polite"
+      ></div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       MODAL
+       ===================================================== -->
+  <div
+    id="modal"
+    class="modal hidden"
+    aria-hidden="true"
+  >
+
+    <div
+      id="modalBackdrop"
+      class="modal-backdrop"
+    ></div>
+
+    <div
+      id="modalDialog"
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+
+      <div class="modal-head">
+
+        <div>
+          <h2 id="modalTitle">
+            Modal
+          </h2>
+        </div>
+
+        <button
+          id="modalClose"
+          class="icon-btn"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        id="modalBody"
+        class="modal-body"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST CONTAINER
+       ===================================================== -->
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+
+  <!-- =====================================================
+       APP SCRIPT
+       ===================================================== -->
+  <script src="app.js"></script>
+
+
+  <!-- =====================================================
+       PWA SERVICE WORKER
+       ===================================================== -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(function () {
+            console.log("Dingel Hafizia PWA service worker registered.");
+          })
+          .catch(function (error) {
+            console.warn("Service worker registration failed:", error);
+          });
+      });
+    }
+  </script>
+
+</body>
+</html>
